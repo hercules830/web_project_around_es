@@ -28,3 +28,49 @@ let initialCards = [
 initialCards.forEach((card) => {
   console.log(card.name);
 });
+
+const btnAbrirModalEditar = document.querySelector(".profile__edit-button");
+const modalEditar = document.querySelector("#edit-popup");
+const botonCerrarModalEditar = modalEditar.querySelector(".popup__close");
+const nombrePerfil = document.querySelector(".profile__title");
+const descripcionPerfil = document.querySelector(".profile__description");
+const campoNombre = modalEditar.querySelector(".popup__input_type_name");
+const campoDescripcion = modalEditar.querySelector(
+  ".popup__input_type_description"
+);
+const formEditar = modalEditar.querySelector(".popup__form");
+
+function openModal(modal) {
+  modal.classList.add("popup_is-opened");
+}
+
+function closeModal(modal) {
+  modal.classList.remove("popup_is-opened");
+}
+
+btnAbrirModalEditar.addEventListener("click", handleOpenEditModal);
+
+botonCerrarModalEditar.addEventListener("click", function () {
+  closeModal(modalEditar);
+});
+
+function fillProfileForm() {
+  campoNombre.value = nombrePerfil.textContent;
+  campoDescripcion.value = descripcionPerfil.textContent;
+}
+
+function handleOpenEditModal() {
+  fillProfileForm();
+  openModal(modalEditar);
+}
+
+function handleProfileFormSubmit(evt) {
+  evt.preventDefault();
+
+  nombrePerfil.textContent = campoNombre.value;
+  descripcionPerfil.textContent = campoDescripcion.value;
+
+  closeModal(modalEditar);
+}
+
+formEditar.addEventListener("submit", handleProfileFormSubmit);
