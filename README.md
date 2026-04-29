@@ -8,7 +8,7 @@ Este proyecto fue desarrollado para aplicar conceptos de JavaScript, manipulando
 
 ## 🚀 Ver el proyecto en vivo
 
-[![Ver en GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Ver%20Deploy-5c5cff?style=for-the-badge)](https://TU_USUARIO.github.io/TU_REPOSITORIO/)
+[![Ver en GitHub Pages](https://hercules830.github.io/web_project_around_es/)
 
 *(Recuerda reemplazar `TU_USUARIO` y `TU_REPOSITORIO` por los tuyos).*
 
