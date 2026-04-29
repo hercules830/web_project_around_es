@@ -8,9 +8,9 @@ Este proyecto fue desarrollado para aplicar conceptos de JavaScript, manipulando
 
 ## 🚀 Ver el proyecto en vivo
 
-[![Ver en GitHub Pages](https://hercules830.github.io/web_project_around_es/)
+https://hercules830.github.io/web_project_around_es/
 
-*(Recuerda reemplazar `TU_USUARIO` y `TU_REPOSITORIO` por los tuyos).*
+
 
 ---
 
