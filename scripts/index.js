@@ -1,10 +1,14 @@
-// FORMA CORRECTA DE AHORA EN ADELANTE PARA MIS PROXIMOS PROYECTOS
-// 1 DECLARAR TODO
-// 2 CREAR LAS HERRAMIENTAS
-// 3 ASIGNAR LAS TAREAS
-// 4 ARRANCAR EL MOTOR
+import { enableValidation, resetValidation } from "./validate.js";
 
-// 1 DECLARAR TODO
+const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+};
+
 let initialCards = [
   {
     name: "Valle de Yosemite",
@@ -55,19 +59,28 @@ const popupInputCardName = newCardPopup.querySelector(
 );
 const popupInputCardUrl = newCardPopup.querySelector(".popup__input_type_url");
 
-// POPUP DE LA IMAGEN:
 const popupImage = document.querySelector("#image-popup");
 const btnClosePopupImage = popupImage.querySelector(".popup__close");
 const imgInPopup = popupImage.querySelector(".popup__image");
 const popupCaption = popupImage.querySelector(".popup__caption");
 
-//2 CREAR LAS HERRAMIENTAS
+function handleEscClose(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(".popup_is-opened");
+    if (openedPopup) {
+      closeModal(openedPopup);
+    }
+  }
+}
+
 function openModal(modal) {
   modal.classList.add("popup_is-opened");
+  document.addEventListener("keydown", handleEscClose);
 }
 
 function closeModal(modal) {
   modal.classList.remove("popup_is-opened");
+  document.removeEventListener("keydown", handleEscClose);
 }
 
 function fillProfileForm() {
@@ -77,6 +90,7 @@ function fillProfileForm() {
 
 function handleOpenEditModal() {
   fillProfileForm();
+  resetValidation(formEditar, validationConfig);
   openModal(modalEditar);
 }
 
@@ -138,8 +152,6 @@ function renderCard(name, link, cardsList) {
   cardsList.append(newCard);
 }
 
-// 3 ASIGNAR LAS TAREAS
-
 btnAbrirModalEditar.addEventListener("click", handleOpenEditModal);
 
 botonCerrarModalEditar.addEventListener("click", function () {
@@ -149,6 +161,8 @@ botonCerrarModalEditar.addEventListener("click", function () {
 formEditar.addEventListener("submit", handleProfileFormSubmit);
 
 profileAddBtn.addEventListener("click", function () {
+  formCrearCard.reset();
+  resetValidation(formCrearCard, validationConfig);
   openModal(newCardPopup);
 });
 
@@ -162,8 +176,17 @@ btnClosePopupImage.addEventListener("click", function () {
   closeModal(popupImage);
 });
 
-// 4 ARRANCAR EL MOTOR
+const popups = document.querySelectorAll(".popup");
+popups.forEach((popup) => {
+  popup.addEventListener("mousedown", (evt) => {
+    if (evt.target.classList.contains("popup_is-opened")) {
+      closeModal(popup);
+    }
+  });
+});
 
 initialCards.forEach((card) => {
   renderCard(card.name, card.link, cardsList);
 });
+
+enableValidation(validationConfig);
